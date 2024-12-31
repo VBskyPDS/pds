@@ -1,4 +1,3 @@
-require("dotenv").config();
 const MINIO_BUCKET = process.env.MINIO_BUCKET;
 const S3_BUCKET = process.env.S3_BUCKET;
 const MINIO_ACCESS_KEY = process.env.MINIO_ACCESS_KEY;
