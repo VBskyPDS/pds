@@ -1,4 +1,12 @@
-"use strict";
+require("dotenv").config();
+
+const MINIO_BUCKET = process.env.MINIO_BUCKET;
+const S3_BUCKET = process.env.S3_BUCKET;
+const MINIO_ACCESS_KEY = process.env.MINIO_ACCESS_KEY;
+const MINIO_SECRET_KEY = process.env.MINIO_SECRET_KEY;
+const MINIO_ENDPOINT = process.env.MINIO_ENDPOINT;
+
+("use strict");
 const {
   PDS,
   envToCfg,
@@ -10,8 +18,10 @@ const pkg = require("@atproto/pds/package.json");
 
 const main = async () => {
   const env = readEnv();
+  console.log("Environment variables:", env); // Check all environment variables being loaded
   env.version ||= pkg.version;
   const cfg = envToCfg(env);
+  console.log("Config:", cfg); // Check the resulting configuration
   const secrets = envToSecrets(env);
   const pds = await PDS.create(cfg, secrets);
   await pds.start();
